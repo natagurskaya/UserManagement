@@ -1,14 +1,17 @@
 package com.study.lab.service;
 
-import com.study.lab.ServiceLocator;
 import com.study.lab.dao.UserDao;
 import com.study.lab.entity.User;
 
 import java.util.List;
 
-public class UserService implements UserDao {
+public class UserService implements Service {
 
-    private UserDao userDao = ServiceLocator.get(UserDao.class);
+    private UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     public List<User> getAll() {
@@ -16,17 +19,12 @@ public class UserService implements UserDao {
     }
 
     @Override
-    public void save(User user) {
-
-    }
-
-    @Override
-    public void update(User user) {
-
-    }
-
-    @Override
     public void delete(User user) {
+        userDao.delete(user);
+    }
 
+    @Override
+    public void add(User user) {
+        userDao.add(user);
     }
 }

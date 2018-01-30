@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8" />
     <title>User Management</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/deleteUser.js"></script>
 </head>
 <body>
 <h1>User Management System</h1>
@@ -10,7 +12,7 @@
     <tr>
         <td valign="top" style="width: 15%" bgcolor=#FDF5E6>
             <br>
-            <p align="center">Add User</p>
+            <p align="center"><a href="addUser">Add User</a></p>
             <p align="center">Show All Users</p>
         </td>
         <td style="width: 850%">
@@ -32,12 +34,11 @@
                         <td align="center">${user.getLastName()}</td>
                         <td align="center">${user.getPayment()}</td>
                         <td align="center">
-                            <button><img src="https://n6-img-fp.akamaized.net/free-icon/delete-button_318-77600.jpg?size=338&ext=jpg"
-                                    alt="Delete"
-                                    style="vertical-align: middle" height="20" width="30"></button>
-                            <button><img src="http://freevector.co/wp-content/uploads/2011/12/84380-edit-button.png"
-                                         alt="Delete"
-                                         style="vertical-align: middle" height="20" width="30"></button>
+                                <input type="hidden" name="id" value="${user.getId()}" />
+                                <button type="button" id="${user.getId()}" onclick="deleteUser(${user.getId()})">
+                                    <img src="https://n6-img-fp.akamaized.net/free-icon/delete-button_318-77600.jpg?size=338&ext=jpg"
+                                         height="20" width="30">
+                                </button>
                         </td>
                     </tr>
                 </#list>

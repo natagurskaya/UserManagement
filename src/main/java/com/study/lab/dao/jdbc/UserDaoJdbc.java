@@ -12,7 +12,9 @@ public class UserDaoJdbc implements UserDao {
     private static final String USERNAME = "root";
     private static final String PASS = "root123";
 
-    public static final String SQL_GET_ALL = "select id, firstName, lastName, payment from user";
+    private static final String SQL_GET_ALL = "select id, firstName, lastName, payment from user";
+    private static final String SQL_DELETE = "delete from user where id = ?";
+    private static final String SQL_ADD = "insert into user (firstName, lastName, payment) values(?, ?, ?)";
 
     @Override
     public List<User> getAll() {
@@ -31,34 +33,43 @@ public class UserDaoJdbc implements UserDao {
                 result.add(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Cannot create connection!", e);
+            throw new RuntimeException("Users can't be shown", e);
         }
         return result;
     }
 
     @Override
-    public void save(User user) {
-
-    }
-
-    @Override
-    public void update(User user) {
-
-    }
-
-    @Override
     public void delete(User user) {
-
+        try (Connection connection = connectToDatabase()) {
+            PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
+            statement.setInt(1, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot delete user!", e);
+        }
     }
 
-    private static Connection connectToDatabase() {
+    @Override
+    public void add(User user) {
+        try (Connection connection = connectToDatabase();
+             PreparedStatement statement = connection.prepareStatement(SQL_ADD)) {
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setDouble(3, user.getPayment());
+            statement.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Cannot add user!", e);
+        }
+    }
+
+    private static Connection connectToDatabase() throws SQLException {
         Connection connection;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, USERNAME, PASS);
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("Driver is not found", e);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        connection = DriverManager.getConnection(URL, USERNAME, PASS);
         return connection;
     }
 }
