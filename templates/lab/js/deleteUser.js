@@ -1,11 +1,11 @@
 function deleteUser(id){
 $.ajax({
-    url: '/user',
+    url: '/user/' + id,
     type: 'DELETE',
-    data:{"id": id},
+
 
     success: function() {
-        // Do something with the result
+        window.location.href = 'http://localhost:8080/user';
     }
 });
 }

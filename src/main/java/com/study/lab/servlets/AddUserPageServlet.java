@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddUserServlet extends HttpServlet {
+public class AddUserPageServlet extends HttpServlet {
     private UserService userService;
 
-    public AddUserServlet(UserService userService) {
+    public AddUserPageServlet(UserService userService) {
         this.userService = userService;
     }
 
@@ -34,21 +34,4 @@ public class AddUserServlet extends HttpServlet {
         resp.setStatus(HttpServletResponse.SC_OK);
         resp.getWriter().write(page);
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        User user = new User();
-
-        user.setFirstName(req.getParameter("firstName"));
-        user.setLastName(req.getParameter("lastName"));
-        user.setPayment(Double.parseDouble(req.getParameter("payment")));
-
-
-        userService.add(user);
-
-
-        resp.sendRedirect("/addUser");
-    }
-
 }

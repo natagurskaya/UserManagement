@@ -12,4 +12,8 @@ public interface Service {
 
     void add(User user);
 
+    void update(User user);
+
+    User getById(Integer id);
+
 }

@@ -27,4 +27,14 @@ public class UserService implements Service {
     public void add(User user) {
         userDao.add(user);
     }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
+    public User getById(Integer id) {
+        return userDao.getById(id);
+    }
 }

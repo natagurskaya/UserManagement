@@ -41,8 +41,38 @@ public class UserServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User user = new User();
-        user.setId(Integer.parseInt(req.getParameter("id")));
+        String id = req.getPathInfo().substring(1);
+        user.setId(Integer.parseInt(id));
         userService.delete(user);
+
+        resp.sendRedirect("/user");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        User user = new User();
+
+        user.setFirstName(req.getParameter("firstName"));
+        user.setLastName(req.getParameter("lastName"));
+        user.setPayment(Double.parseDouble(req.getParameter("payment")));
+
+        userService.add(user);
+
+        resp.sendRedirect("/user");
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        User user = new User();
+        String id = req.getPathInfo().substring(1);
+        user.setId(Integer.parseInt(id));
+        user.setFirstName(req.getParameter("firstName"));
+        user.setLastName(req.getParameter("lastName"));
+        user.setPayment(Double.parseDouble(req.getParameter("payment")));
+
+        userService.update(user);
 
         resp.sendRedirect("/user");
     }

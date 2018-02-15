@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/updateUser.js"></script>
+</head>
+<body>
+<h1>Update user</h1>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+    <tr>
+        <td valign="top" style="width: 15%" bgcolor=#FDF5E6>
+            <br>
+            <p align="center"><a href="addUser">Add User</a></p>
+            <p align="center"><a href="user">Show All Users</a></p>
+        </td>
+
+        <td style="width: 850%">
+                <input name="id" value="${id}" type="hidden">
+                <p>First name: <input type="text" name="firstName" value="${firstName}"/></p>
+                <p>Last name: <input type="text" name="lastName" value="${lastName}"/></p>
+                <p>Payment: <input type="text" name="payment" value="${payment}"/></p>
+
+                <input type="submit" value="Update" id="${id}" onclick="updateUser('${id}','${firstName}','${lastName}','${payment}')"/>
+
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>
+

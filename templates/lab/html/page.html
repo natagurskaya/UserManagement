@@ -35,10 +35,17 @@
                         <td align="center">${user.getPayment()}</td>
                         <td align="center">
                                 <input type="hidden" name="id" value="${user.getId()}" />
-                                <button type="button" id="${user.getId()}" onclick="deleteUser(${user.getId()})">
+                                <button type="button" id="${user.getId()}" onclick="deleteUser(id)">
                                     <img src="https://n6-img-fp.akamaized.net/free-icon/delete-button_318-77600.jpg?size=338&ext=jpg"
                                          height="20" width="30">
                                 </button>
+
+                           <input type="hidden" name="id" value="${user.getId()}" />
+                            <button type="button"  id="${user.getId()}" onclick = "window.location.href='updateUser/?id=' + id">
+                                <img src="http://freevector.co/wp-content/uploads/2014/02/61776-edit-button.png"
+                                     height="20" width="30">
+                            </button>
+
                         </td>
                     </tr>
                 </#list>

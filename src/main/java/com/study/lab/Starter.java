@@ -3,7 +3,8 @@ package com.study.lab;
 import com.study.lab.dao.UserDao;
 import com.study.lab.dao.jdbc.UserDaoJdbc;
 import com.study.lab.service.UserService;
-import com.study.lab.servlets.AddUserServlet;
+import com.study.lab.servlets.AddUserPageServlet;
+import com.study.lab.servlets.UpdateUserPageServlet;
 import com.study.lab.servlets.UserServlet;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -18,7 +19,8 @@ public class Starter {
         UserDao userDao = new UserDaoJdbc();
         UserService userService = new UserService(userDao);
         UserServlet userServlet = new UserServlet(userService);
-        AddUserServlet addUserServlet= new AddUserServlet(userService);
+        AddUserPageServlet addUserPageServlet= new AddUserPageServlet(userService);
+        UpdateUserPageServlet updateUserPageServlet = new UpdateUserPageServlet(userService);
 
         HandlerList handlerList = new HandlerList();
         ResourceHandler resourceHandler = new ResourceHandler();
@@ -27,8 +29,9 @@ public class Starter {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
-        context.addServlet(new ServletHolder(userServlet), "/user");
-        context.addServlet(new ServletHolder(addUserServlet), "/addUser");
+        context.addServlet(new ServletHolder(userServlet), "/user/*");
+        context.addServlet(new ServletHolder(addUserPageServlet), "/addUser");
+        context.addServlet(new ServletHolder(updateUserPageServlet), "/updateUser/*");
         handlerList.setHandlers(new Handler[]{resourceHandler, context});
 
         Server server = new Server(8080);
