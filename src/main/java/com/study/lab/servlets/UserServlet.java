@@ -1,5 +1,7 @@
 package com.study.lab.servlets;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.study.lab.entity.User;
 import com.study.lab.service.UserService;
 import com.study.lab.templater.PageGenerator;
@@ -8,10 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class UserServlet extends HttpServlet {
 
@@ -41,8 +43,14 @@ public class UserServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User user = new User();
-        String id = req.getPathInfo().substring(1);
-        user.setId(Integer.parseInt(id));
+
+        String jsonString = getJsonString(req);
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(jsonString).getAsJsonObject();
+
+        int id = jsonObject.get("id").getAsInt();
+        user.setId(id);
+
         userService.delete(user);
 
         resp.sendRedirect("/user");
@@ -66,15 +74,41 @@ public class UserServlet extends HttpServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User user = new User();
-        String id = req.getPathInfo().substring(1);
-        user.setId(Integer.parseInt(id));
-        user.setFirstName(req.getParameter("firstName"));
-        user.setLastName(req.getParameter("lastName"));
-        user.setPayment(Double.parseDouble(req.getParameter("payment")));
+
+        String jsonString = getJsonString(req);
+        JsonParser parser = new JsonParser();
+        JsonObject jsonObject = parser.parse(jsonString).getAsJsonObject();
+
+        int id = jsonObject.get("id").getAsInt();
+        String firstName = jsonObject.get("firstName").getAsString();
+        String lastName = jsonObject.get("lastName").getAsString();
+        double payment = jsonObject.get("payment").getAsDouble();
+
+        user.setId(id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPayment(payment);
 
         userService.update(user);
 
         resp.sendRedirect("/user");
+    }
+
+    private String getJsonString (HttpServletRequest req){
+
+        StringBuilder result = new StringBuilder();
+
+        if (req.getContentLength() > 0) {
+            String line;
+            try {
+                BufferedReader reader = new BufferedReader(req.getReader());
+                while ((line = reader.readLine()) != null)
+                    result.append(line);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result.toString();
     }
 }
 
