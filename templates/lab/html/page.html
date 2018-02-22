@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>User Management</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/deleteUser.js"></script>
 </head>
 <body>
@@ -34,14 +34,14 @@
                         <td align="center">${user.getPayment()}</td>
                         <td align="center">
                             <input type="hidden" name="id" value="${user.getId()}"/>
-                            <button type="button" id="${user.getId()}" onclick="deleteUser(id)">
+                            <button type="button"  onclick="deleteUser(${user.getId()})">
                                 <img src="https://n6-img-fp.akamaized.net/free-icon/delete-button_318-77600.jpg?size=338&ext=jpg"
                                      height="20" width="30">
                             </button>
 
                             <input type="hidden" name="id" value="${user.getId()}"/>
-                            <button type="button" id="${user.getId()}"
-                                    onclick="window.location.href='updateUser?id=' + id">
+                            <button type="button"
+                                    onclick="window.location.href='updateUser?id=' + ${user.getId()}">
                                 <img src="http://freevector.co/wp-content/uploads/2014/02/61776-edit-button.png"
                                      height="20" width="30">
                             </button>

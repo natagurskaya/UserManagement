@@ -1,11 +1,11 @@
-package com.study.lab.service;
+package com.gurskaya.userManagement.service.userServiceImpl;
 
-import com.study.lab.dao.UserDao;
-import com.study.lab.entity.User;
+import com.gurskaya.userManagement.dao.UserDao;
+import com.gurskaya.userManagement.entity.User;
 
 import java.util.List;
 
-public class UserService implements Service {
+public class UserService implements com.gurskaya.userManagement.service.UserService {
 
     private UserDao userDao;
 
@@ -34,7 +34,7 @@ public class UserService implements Service {
     }
 
     @Override
-    public User getById(Integer id) {
+    public User getById(int id) {
         return userDao.getById(id);
     }
 }

@@ -1,9 +1,6 @@
-package com.study.lab.servlets;
+package com.gurskaya.userManagement.servlets;
 
-import com.study.lab.entity.User;
-import com.study.lab.service.UserService;
-import com.study.lab.templater.PageGenerator;
-import org.eclipse.jetty.server.Authentication;
+import com.gurskaya.userManagement.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,21 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddUserPageServlet extends HttpServlet {
-    private UserService userService;
-
-    public AddUserPageServlet(UserService userService) {
-        this.userService = userService;
-    }
-
-    private String page = "addUser.html";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = new HashMap<>();
 
-
         PageGenerator instance = PageGenerator.instance();
-        String page = instance.getPage(this.page, pageVariables);
+        String page = instance.getPage("addUser.html", pageVariables);
 
         resp.setContentType("text/html; charset=utf-8");
         resp.setStatus(HttpServletResponse.SC_OK);

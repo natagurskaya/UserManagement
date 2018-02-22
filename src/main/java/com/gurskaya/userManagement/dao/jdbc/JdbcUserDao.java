@@ -1,13 +1,13 @@
-package com.study.lab.dao.jdbc;
+package com.gurskaya.userManagement.dao.jdbc;
 
-import com.study.lab.dao.UserDao;
-import com.study.lab.entity.User;
+import com.gurskaya.userManagement.dao.UserDao;
+import com.gurskaya.userManagement.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJdbc implements UserDao {
+public class JdbcUserDao implements UserDao {
     private static final String URL = "jdbc:mysql://localhost:3306/usermanagement?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASS = "root123";
@@ -15,8 +15,8 @@ public class UserDaoJdbc implements UserDao {
     private static final String SQL_GET_ALL = "select id, firstName, lastName, payment from user;";
     private static final String SQL_DELETE = "delete from user where id = ?;";
     private static final String SQL_ADD = "insert into user (firstName, lastName, payment) values(?, ?, ?);";
-    public static final String SQL_UPDATE = "update user set firstName = ?, lastName = ?, payment = ? where id = ?;";
-    public static final String SQL_GET_BY_ID = "select firstName, lastName, payment from user where id = ?;";
+    private static final String SQL_UPDATE = "update user set firstName = ?, lastName = ?, payment = ? where id = ?;";
+    private static final String SQL_GET_BY_ID = "select firstName, lastName, payment from user where id = ?;";
 
     @Override
     public List<User> getAll() {
@@ -79,7 +79,7 @@ public class UserDaoJdbc implements UserDao {
     }
 
     @Override
-    public User getById(Integer id) {
+    public User getById(int id) {
         User user = null;
         try (Connection connection = connectToDatabase();
              PreparedStatement statement = connection.prepareStatement(SQL_GET_BY_ID)) {

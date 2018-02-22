@@ -1,4 +1,4 @@
-package com.study.lab.templater;
+package com.gurskaya.userManagement.templater;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

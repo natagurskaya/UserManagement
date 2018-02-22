@@ -1,4 +1,4 @@
-package com.study.lab.entity;
+package com.gurskaya.userManagement.entity;
 
 public class User {
 

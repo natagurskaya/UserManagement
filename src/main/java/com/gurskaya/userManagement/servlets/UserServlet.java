@@ -1,10 +1,10 @@
-package com.study.lab.servlets;
+package com.gurskaya.userManagement.servlets;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.study.lab.entity.User;
-import com.study.lab.service.UserService;
-import com.study.lab.templater.PageGenerator;
+import com.gurskaya.userManagement.entity.User;
+import com.gurskaya.userManagement.service.userServiceImpl.UserService;
+import com.gurskaya.userManagement.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

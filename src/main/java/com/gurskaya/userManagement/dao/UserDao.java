@@ -1,6 +1,6 @@
-package com.study.lab.dao;
+package com.gurskaya.userManagement.dao;
 
-import com.study.lab.entity.User;
+import com.gurskaya.userManagement.entity.User;
 import java.util.List;
 
 public interface UserDao {
@@ -13,5 +13,5 @@ public interface UserDao {
 
     void update(User user);
 
-    User getById(Integer id);
+    User getById(int id);
 }

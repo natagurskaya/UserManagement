@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Update User</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/updateUser.js"></script>
 </head>
 <body>
@@ -13,9 +13,9 @@
         </td>
         <td style="width: 85%">
             <h1>Update user</h1>
-            <p>First name: <input type="text" id="firstName" name="firstName" value="${firstName}"/></p>
-            <p>Last name: <input type="text" id="lastName" name="lastName" value="${lastName}"/></p>
-            <p>Payment: <input type="text" id="payment" name="payment" value="${payment}"/></p>
+            <p>First name: <input type="text" id="firstName" name="firstName" value="${user.getFirstName()}"/></p>
+            <p>Last name: <input type="text" id="lastName" name="lastName" value="${user.getLastName()}"/></p>
+            <p>Payment: <input type="text" id="payment" name="payment" value="${user.getPayment()}"/></p>
             <input type="submit" value="Update" onclick="updateUser(${id})"/>
         </td>
     </tr>
